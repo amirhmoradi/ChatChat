@@ -1,4 +1,4 @@
-import { sendClaudeMessages } from '@/utils/provider/claude/messages';
+import { sendClaudeMessages, sendClaudeStreamMessages } from '@/utils/provider/claude/messages';
 import { sendCohereMessages } from '@/utils/provider/cohere/messages';
 import { sendTeamStreamMessages } from '@/utils/provider/team/messages';
 import { sendHuggingFaceMessages } from '@/utils/provider/huggingface/messages';
@@ -10,6 +10,10 @@ export const runtime = 'edge';
 export async function POST(req: Request): Promise<Response> {
     const { stream, serviceProvider, config, messages } = await req.json();
 
+    if (!messages) {
+        return new Response('No messages in the request', { status: 400 });
+    }
+
     switch (serviceProvider) {
         default:
         case 'OpenAI':
@@ -17,10 +21,6 @@ export async function POST(req: Request): Promise<Response> {
             const openAIAPIEndpoint = config?.apiEndpoint as string;
             const opneAIAPIModel = (config?.apiModel as OpenAIModel) || 'gpt-3.5-turbo';
             const opneAIAPITemperature = (config?.apiTemperature as number) || 0.3;
-
-            if (!messages) {
-                return new Response('No messages in the request', { status: 400 });
-            }
 
             const openAIPayload: OpenAIChatPayload = {
                 model: opneAIAPIModel as OpenAIModel,
@@ -44,10 +44,6 @@ export async function POST(req: Request): Promise<Response> {
             const azureAPIModel = (config?.apiModel as OpenAIModel) || 'gpt-3.5-turbo';
             const azureAPITemperature = (config?.apiTemperature as number) || 0.3;
             const azureAPIDeploymentName = config?.apiDeploymentName as string;
-
-            if (!messages) {
-                return new Response('No messages in the request', { status: 400 });
-            }
 
             const azurePayload: OpenAIChatPayload = {
                 model: azureAPIModel as OpenAIModel,
@@ -97,8 +93,14 @@ export async function POST(req: Request): Promise<Response> {
             const claudeAPIKey = config?.apiKey as string;
             const claudeAPITemperature = config?.apiTemperature as number;
 
-            const claudeMessagesResponse = await sendClaudeMessages(claudeModel, claudeMessage, claudeAPIKey, claudeAPITemperature);
+            if (stream) {
+                const claudeStreamMessagesResponse = await sendClaudeStreamMessages(claudeModel, claudeMessage, claudeAPIKey, claudeAPITemperature);
 
-            return new Response(JSON.stringify(claudeMessagesResponse));
+                return new Response(claudeStreamMessagesResponse);
+            } else {
+                const claudeMessagesResponse = await sendClaudeMessages(claudeModel, claudeMessage, claudeAPIKey, claudeAPITemperature);
+
+                return new Response(JSON.stringify(claudeMessagesResponse));
+            }
     }
 }

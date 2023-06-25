@@ -138,13 +138,13 @@ const ModeSettings = ({ systemPromptContent, setSystemPromptContent }: { systemP
             case 'OpenAI':
             case 'Team':
             case 'Azure':
+            case 'Claude':
                 setGlobalDisabled(false);
                 setEnableStreamMessages(true);
                 break;
             default:
             case 'Cohere':
             case 'Hugging Face':
-            case 'Claude':
                 setGlobalDisabled(true);
                 setEnableSystemPrompt(false);
                 setIsContextMode(true);
