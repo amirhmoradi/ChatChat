@@ -177,6 +177,8 @@
     "team": "团队",
     "Info": "信息",
     "info": "信息",
+    "Admin": "管理员",
+    "admin": "管理员",
     "Manage personal info for profile": "管理个人资料信息",
     "Your account Conversation Record": "您的账户对话记录",
     "Advanced configuration for your account": "账户的高级配置",
@@ -209,7 +211,8 @@
     "Azure Key is required": "必须提供 Azure Key",
     "Azure Endpoint is required": "必须提供 Azure Endpoint",
     "Azure Deployment Name is required": "必须提供 Azure Deployment Name",
-    "Claude Key is required": "必须提供 Claude Key"
+    "Claude Key is required": "必须提供 Claude Key",
+    "Error: Image must be a valid URL": "错误：图像必须是有效的 URL"
   },
   "component": {
     "No command found": "未找到命令",

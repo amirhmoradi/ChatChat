@@ -34,6 +34,12 @@ const ProfileInfoForm = ({ user }: any) => {
     const onSave = async () => {
         setIsLoading(true);
 
+        if (!image.startsWith('http')) {
+            setIsLoading(false);
+            toast.error(t('Error: Image must be a valid URL'));
+            return;
+        }
+
         const response = await fetch(`/api/user/${user.id}`, {
             method: 'PATCH',
             headers: {
@@ -78,7 +84,7 @@ const ProfileInfoForm = ({ user }: any) => {
 
     return (
         <div className='space-y-10 overflow-auto md:my-36 md:w-10/12 md:space-y-16 xl:w-6/12'>
-            <form className='space-y-10 rounded-xl md:p-3'>
+            <div className='space-y-10 rounded-xl md:p-3'>
                 <div className='flex w-full justify-between space-x-3'>
                     <div className='flex w-full flex-col items-start space-y-1'>
                         <p className='text-sm'>{t('Full Name')}</p>
@@ -95,10 +101,10 @@ const ProfileInfoForm = ({ user }: any) => {
                 </div>
                 <div className='flex justify-end'>
                     <Button variant='default' onClick={() => onSave()} disabled={isLoading}>
-                        <span>{t('Save')}</span>
+                        {t('Save')}
                     </Button>
                 </div>
-            </form>
+            </div>
 
             <Separator />
 

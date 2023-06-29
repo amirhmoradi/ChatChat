@@ -112,3 +112,30 @@ model TeamMember {
   @@unique([teamId, userId])
   @@map(name: "team_members")
 }
+
+model Site {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  allowRecordCloudSync Boolean @default(false)
+  allowRegistration    Boolean @default(false)
+  allowInvitation      Boolean @default(false)
+
+  openAIKey      String?
+  openAIModel    String?
+  openAIEndpoint String? @default("https://api.openai.com")
+
+  azureAPIKey         String?
+  azureModel          String?
+  azureEndpoint       String?
+  azureDeploymentName String?
+
+  claudeAPIKey String?
+
+  cohereAPIKey String?
+
+  huggingFaceAccessToken String?
+
+  @@map(name: "sites")
+}

@@ -177,6 +177,8 @@
     "team": "team",
     "Info": "Info",
     "info": "info",
+    "Admin": "Admin",
+    "admin": "admin",
     "Manage personal info for profile": "Persönliche Informationen für das Profil verwalten",
     "Your account Conversation Record": "Ihre Aufzeichnung der Unterhaltungen",
     "Advanced configuration for your account": "Erweiterte Konfiguration für Ihr Konto",
@@ -209,7 +211,8 @@
     "Azure Key is required": "Azure-Schlüssel ist erforderlich",
     "Azure Endpoint is required": "Azure-Endpunkt ist erforderlich",
     "Azure Deployment Name is required": "Azure-Bereitstellungsname ist erforderlich",
-    "Claude Key is required": "Claude-Schlüssel ist erforderlich"
+    "Claude Key is required": "Claude-Schlüssel ist erforderlich",
+    "Error: Image must be a valid URL": "Fehler: Bild muss eine gültige URL sein"
   },
   "component": {
     "No command found": "Kein Befehl gefunden",

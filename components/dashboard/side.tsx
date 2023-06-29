@@ -69,6 +69,20 @@ const DashboardSide = () => {
                                 )}
                             </div>
                         ))}
+                        {DashboardAdminSideItems.map((item, index) => (
+                            <div key={index} className='flex flex-col space-y-2'>
+                                <p className='text-gray-500/70'>{t(item.name)}</p>
+                                {item.children && (
+                                    <div className='flex w-auto flex-col items-start space-y-1'>
+                                        {item.children.map((child, index) => (
+                                            <Button variant='ghost' key={index} className='text-gray-500' onClick={() => router.push('/dashboard/' + item.base + '/' + child.href)}>
+                                                {t(child.name)}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
                     </div>
                     <div>
                         <p className='text-sm'>{customConfig.Dashboard.side}</p>
@@ -111,6 +125,20 @@ export const DashboardSideItems = [
                 name: 'Overview',
                 href: 'info',
                 description: 'Team Overview',
+            },
+        ],
+    },
+];
+
+export const DashboardAdminSideItems = [
+    {
+        name: 'Admin',
+        base: 'admin',
+        children: [
+            {
+                name: 'Overview',
+                href: 'info',
+                description: 'Admin Overview',
             },
         ],
     },

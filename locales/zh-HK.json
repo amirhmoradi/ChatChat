@@ -177,6 +177,8 @@
     "team": "團隊",
     "Info": "資訊",
     "info": "資訊",
+    "Admin": "管理員",
+    "admin": "管理員",
     "Manage personal info for profile": "管理個人資料",
     "Your account Conversation Record": "您的對話記錄",
     "Advanced configuration for your account": "帳戶的高級配置",
@@ -209,7 +211,8 @@
     "Azure Key is required": "需要Azure Key",
     "Azure Endpoint is required": "需要Azure Endpoint",
     "Azure Deployment Name is required": "需要Azure Deployment Name",
-    "Claude Key is required": "需要Claude Key"
+    "Claude Key is required": "需要Claude Key",
+    "Error: Image must be a valid URL": "錯誤：圖片必須是有效的URL"
   },
   "component": {
     "No command found": "找不到命令",

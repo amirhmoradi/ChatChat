@@ -177,6 +177,8 @@
     "team": "команда",
     "Info": "Информация",
     "info": "информация",
+    "Admin": "Администратор",
+    "admin": "администратор",
     "Manage personal info for profile": "Управление личной информацией для профиля",
     "Your account Conversation Record": "Записи ваших разговоров",
     "Advanced configuration for your account": "Расширенная конфигурация для вашего аккаунта",
@@ -209,7 +211,8 @@
     "Azure Key is required": "Требуется ключ Azure",
     "Azure Endpoint is required": "Требуется конечная точка Azure",
     "Azure Deployment Name is required": "Требуется имя развертывания Azure",
-    "Claude Key is required": "Требуется ключ Claude"
+    "Claude Key is required": "Требуется ключ Claude",
+    "Error: Image must be a valid URL": "Ошибка: изображение должно быть действительным URL-адресом"
   },
   "component": {
     "No command found": "Команда не найдена",
