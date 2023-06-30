@@ -140,6 +140,11 @@ export const DashboardAdminSideItems = [
                 href: 'info',
                 description: 'Admin Overview',
             },
+            {
+                name: 'Advance',
+                href: 'advance',
+                description: 'Advanced configuration',
+            },
         ],
     },
 ];
