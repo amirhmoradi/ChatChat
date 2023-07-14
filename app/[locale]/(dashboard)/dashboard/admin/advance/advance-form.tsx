@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectGroup, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const AdvanceForm = () => {
@@ -69,8 +70,6 @@ const AdvanceForm = () => {
             return;
         }
     };
-
-    console.log(serviceProvider);
 
     let serviceProviderForm = null;
 
@@ -190,25 +189,28 @@ const AdvanceForm = () => {
 
     return (
         <div className='space-y-10 overflow-auto md:my-36 md:w-10/12 md:space-y-16 xl:w-6/12'>
-            <div className='space-y-10 rounded-xl md:p-3'>
-                <div className='flex w-full flex-col items-start space-y-1'>
-                    <Label className='text-sm'>Service Provider</Label>
-                    <Select value={serviceProvider} onValueChange={(value: string) => setServiceProvider(value as ServiceProviderProps)}>
-                        <SelectTrigger>
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {serviceProviderList.map((service, index) => (
-                                <SelectGroup key={index}>
-                                    <SelectItem value={service.value} className='text-sm'>
-                                        {service.name}
-                                    </SelectItem>
-                                </SelectGroup>
-                            ))}
-                        </SelectContent>
-                    </Select>
+            <div className='space-y-5 md:p-3'>
+                <div className='space-y-10'>
+                    <div className='flex w-full flex-col items-start space-y-1'>
+                        <Label className='text-sm'>Service Provider</Label>
+                        <Select value={serviceProvider} onValueChange={(value: string) => setServiceProvider(value as ServiceProviderProps)}>
+                            <SelectTrigger>
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {serviceProviderList.map((service, index) => (
+                                    <SelectGroup key={index}>
+                                        <SelectItem value={service.value} className='text-sm'>
+                                            {service.name}
+                                        </SelectItem>
+                                    </SelectGroup>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <Separator />
+                    {serviceProviderForm}
                 </div>
-                {serviceProviderForm}
                 <div className='flex justify-end'>
                     <Button variant='default' onClick={() => onSubmit()} disabled={isLoading}>
                         {t('Save')}

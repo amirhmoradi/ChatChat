@@ -31,6 +31,8 @@ model User {
   openAIKey            String?
   allowRecordCloudSync Boolean @default(false)
 
+  role String? @default("user")
+
   sessions Session[]
   Record   Record[]
   Share    Share[]
