@@ -535,7 +535,7 @@ const SideAppSettings = ({ user }: { user: User | null }) => {
                         </TabsContent>
                         <TabsContent value='search'>
                             <div className='space-y-3'>
-                                <div>
+                                <div className='space-y-1'>
                                     <Label>{t('Search Engine')}</Label>
                                     <Select value={searchEngine} onValueChange={(value: string) => setSearchEngine(value)}>
                                         <SelectTrigger className='w-full'>
@@ -552,11 +552,11 @@ const SideAppSettings = ({ user }: { user: User | null }) => {
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <div>
+                                <div className='space-y-1'>
                                     <Label>Search Engine ID</Label>
                                     <Input placeholder='55b885......' value={searchEngineID} onChange={(e) => setSearchEngineID(e.target.value)} />
                                 </div>
-                                <div>
+                                <div className='space-y-1'>
                                     <Label>Search API Key</Label>
                                     <Input placeholder='AIzaSyB......' value={searchAPIKey} onChange={(e) => setSearchAPIKey(e.target.value)} />
                                 </div>

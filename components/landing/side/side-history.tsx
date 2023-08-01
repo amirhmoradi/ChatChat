@@ -32,7 +32,7 @@ const SideHistory = () => {
 
             const conversationValues = conversationKeys.map((key) => {
                 const chatValue = localStorage.getItem(key);
-                return JSON.parse(chatValue || '{}');
+                return JSON.parse(chatValue ?? '{}');
             });
 
             setHistories(conversationValues);
