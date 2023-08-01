@@ -196,73 +196,55 @@ const SideAppSettings = ({ user }: { user: User | null }) => {
         }
     }, [azureConfig, claudeConfig, cohereConfig, huggingFaceConfig, openAIConfig, teamConfig]);
 
-    let ProviderConfig = null;
+    const serviceProviders = {
+        OpenAI: OpenAIServiceProvider,
+        'Hugging Face': HuggingFaceServiceProvider,
+        Claude: ClaudeServiceProvider,
+        Azure: AzureServiceProvider,
+        Custom: CustomServiceProvider,
+        Team: TeamServiceProvider,
+        Cohere: CohereServiceProvider,
+        Extension: ExtensionServiceProvider,
+    };
 
-    switch (currentServiceProvider) {
-        case 'OpenAI':
-            ProviderConfig = (
-                <OpenAIServiceProvider
-                    apiKey={apiKey}
-                    apiEndpoint={apiEndpoint}
-                    apiModel={apiModel as OpenAIModel}
-                    apiTemperature={apiTemperature}
-                    setApiKey={setApiKey}
-                    setApiEndpoint={setApiEndpoint}
-                    setApiModel={setApiModel}
-                    setApiTemperature={setApiTemperature}
-                    user={user}
-                    useCloudSettings={useCloudSettings}
-                    setUseCloudSettings={setUseCloudSettings}
-                />
-            );
-            break;
-        case 'Hugging Face':
-            ProviderConfig = <HuggingFaceServiceProvider accessToken={accessToken} huggingFaceModel={huggingFaceModel} setAccessToken={setAccessToken} setHuggingFaceModel={setHuggingFaceModel} />;
-            break;
-        case 'Claude':
-            ProviderConfig = (
-                <ClaudeServiceProvider
-                    claudeAPIKey={claudeAPIKey}
-                    claudeAPIModel={claudeAPIModel}
-                    claudeAPITemperature={claudeAPITemperature}
-                    setClaudeAPIKey={setClaudeAPIKey}
-                    setClaudeAPIModel={setClaudeAPIModel}
-                    setClaudeAPITemperature={setClaudeAPITemperature}
-                />
-            );
-            break;
-        case 'Azure':
-            ProviderConfig = (
-                <AzureServiceProvider
-                    azureAPIKey={azureAPIKey}
-                    azureAPIModel={azureAPIModel}
-                    azureAPIEndpoint={azureAPIEndpoint}
-                    azureAPITemperature={azureAPITemperature}
-                    azureAPIDeploymentName={azureAPIDeploymentName}
-                    setAzureAPIKey={setAzureAPIKey}
-                    setAzureAPIModel={setAzureAPIModel}
-                    setAzureAPIEndpoint={setAzureAPIEndpoint}
-                    setAzureAPITemperature={setAzureAPITemperature}
-                    setAzureAPIDeploymentName={setAzureAPIDeploymentName}
-                />
-            );
-            break;
-        case 'Custom':
-            ProviderConfig = <CustomServiceProvider />;
-            break;
-        case 'Team':
-            ProviderConfig = <TeamServiceProvider accessCode={accessCode} setAccessCode={setAccessCode} />;
-            break;
-        case 'Cohere':
-            ProviderConfig = <CohereServiceProvider cohereAPIKey={cohereAPIKey} setCohereAPIKey={setCohereAPIKey} cohereModel={cohereModel} setCohereModel={setCohereModel} />;
-            break;
-        case 'Extension':
-            ProviderConfig = <ExtensionServiceProvider />;
-            break;
-        default:
-            ProviderConfig = null;
-            break;
-    }
+    const serviceProvidersProps: ServiceProvidersProps = {
+        OpenAI: {
+            apiKey,
+            apiEndpoint,
+            apiModel: apiModel as OpenAIModel,
+            apiTemperature,
+            setApiKey,
+            setApiEndpoint,
+            setApiModel,
+            setApiTemperature,
+            user,
+            useCloudSettings,
+            setUseCloudSettings,
+        },
+        'Hugging Face': { accessToken, huggingFaceModel, setAccessToken, setHuggingFaceModel },
+        Claude: { claudeAPIKey, claudeAPIModel, claudeAPITemperature, setClaudeAPIKey, setClaudeAPIModel, setClaudeAPITemperature },
+        Azure: {
+            azureAPIKey,
+            azureAPIModel,
+            azureAPIEndpoint,
+            azureAPITemperature,
+            azureAPIDeploymentName,
+            setAzureAPIKey,
+            setAzureAPIModel,
+            setAzureAPIEndpoint,
+            setAzureAPITemperature,
+            setAzureAPIDeploymentName,
+        },
+        Custom: {},
+        Team: { accessCode, setAccessCode },
+        Cohere: { cohereAPIKey, setCohereAPIKey, cohereModel, setCohereModel },
+        Extension: {},
+    };
+
+    const ServiceProvider: any = serviceProviders[currentServiceProvider];
+    const providerProps = serviceProvidersProps[currentServiceProvider];
+
+    let ProviderConfig = ServiceProvider ? <ServiceProvider {...providerProps} /> : null;
 
     const onCancel = () => {
         setIsSheetOpen(false);
