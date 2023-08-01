@@ -10,7 +10,7 @@ import { CgMenuBoxed } from 'react-icons/cg';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import { customConfig } from '@/config/custom.config';
+import customConfig from '@/config/custom.config';
 
 const DashboardSide = () => {
     const router = useRouter();

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-interface customConfigProps {
+interface CustomConfigProps {
     Auth: {
         footer: JSX.Element;
     };
@@ -10,7 +10,7 @@ interface customConfigProps {
     };
 }
 
-export const customConfig: customConfigProps = {
+const customConfig: CustomConfigProps = {
     Auth: {
         footer: (
             <p className='text-xs'>
@@ -43,3 +43,5 @@ export const customConfig: customConfigProps = {
         ),
     },
 };
+
+export default customConfig;
