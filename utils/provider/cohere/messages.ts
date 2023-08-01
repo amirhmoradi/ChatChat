@@ -1,6 +1,8 @@
+import { keyValidation } from '@/utils/provider/variableChecker';
+
 export async function sendCohereMessages(model: string, message: string, apiKey: string) {
-    if (!apiKey) {
-        return 'ERROR: No API key provided';
+    if (!keyValidation(apiKey).status) {
+        return keyValidation(apiKey).error;
     }
 
     const response = await fetch('https://api.cohere.ai/generate', {

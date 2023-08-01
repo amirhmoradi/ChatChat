@@ -1,3 +1,5 @@
+import { keyValidation } from '@/utils/provider/variableChecker';
+
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 
 export async function sendAzureStreamMessages(payload: OpenAIChatPayload, apiKey: string, apiEndpoint: string, deploymentName: string) {
@@ -6,8 +8,8 @@ export async function sendAzureStreamMessages(payload: OpenAIChatPayload, apiKey
 
     let counter = 0;
 
-    if (!apiKey) {
-        return 'ERROR: No API key provided';
+    if (!keyValidation(apiKey).status) {
+        return keyValidation(apiKey).error;
     }
 
     if (!apiEndpoint) {

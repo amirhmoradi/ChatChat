@@ -1,10 +1,12 @@
+import { keyValidation } from '@/utils/provider/variableChecker';
+
 export async function sendHuggingFaceStreamMessages(huggingFacePayload: any, accessToken: string) {
     return null;
 }
 
 export async function sendHuggingFaceMessages(model: string, message: string, accessToken: string) {
-    if (!accessToken) {
-        return 'ERROR: No access token provided';
+    if (!keyValidation(accessToken).status) {
+        return keyValidation(accessToken).error;
     }
 
     const response = await fetch(`https://api-inference.huggingface.co/models/` + model, {

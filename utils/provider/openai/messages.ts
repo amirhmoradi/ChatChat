@@ -1,3 +1,5 @@
+import { keyValidation } from '@/utils/provider/variableChecker';
+
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 
 export async function sendOpenAIStreamMessages(payload: OpenAIChatPayload, apiKey: string, apiEndpoint: string) {
@@ -6,8 +8,8 @@ export async function sendOpenAIStreamMessages(payload: OpenAIChatPayload, apiKe
 
     let counter = 0;
 
-    if (!apiKey) {
-        return 'ERROR: No API key provided';
+    if (!keyValidation(apiKey).status) {
+        return keyValidation(apiKey).error;
     }
 
     if (apiKey.includes(';')) {

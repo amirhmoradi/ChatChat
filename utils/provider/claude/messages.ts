@@ -1,6 +1,8 @@
+import { keyValidation } from '@/utils/provider/variableChecker';
+
 export async function sendClaudeMessages(model: string, message: string, apiKey: string, claudeAPITemperature: number) {
-    if (!apiKey) {
-        return 'ERROR: No API key provided';
+    if (!keyValidation(apiKey).status) {
+        return keyValidation(apiKey).error;
     }
 
     const HUMAN_PROMPT = '\n\nHuman:' + message;
